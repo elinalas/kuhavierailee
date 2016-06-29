@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Kuha vierailee</title>
+        <meta charset="utf-8" />
+        
+        
+    </head>
+
+    <body>
+        <h1><span th:text="${vieraskirja.nimi}">Vieraskirjan nimi</span></h1>
+
+        
+        <ul>
+            <li th:each="kommentti: ${kommentit}">
+                <b>Kommentti:</b> <span th:text="${kommentti.sisalto}">kommentti</span><br/>
+                <b>Lähettäjä:</b> <span th:text="${kommentti.lahettaja}">lahettaja</span><br/>
+                <b>Aika:</b> <span th:text="${kommentti.aika}">aika</span><br/><br/>
+            </li>
+        </ul>
+        <form method="POST" th:action="${'/vieraskirjat/' + vieraskirja.id}">
+            Kirjoita kommentti vieraskirjaan:<br/>
+            <textarea rows="4" cols="50" name="sisalto"></textarea><br/>
+            Nimimerkki:<br/>
+            <input type="text" name="nimimerkki"/><br/>
+            <input type="submit" value="Lähetä"/>
+        </form>
+        
+        <a th:href="${'/'}">Siirry vieraskirjojen hallintaan</a><br/>
+        <a th:href="${vieraskirja.kotisivu}">Siirry vieraskirjan kotisivulle</a><br/>
+        
+
+
+
+    </body>
+    
+</html>
