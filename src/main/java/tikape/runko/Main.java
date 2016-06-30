@@ -19,7 +19,7 @@ public class Main {
           // käytetään oletuksena paikallista sqlite-tietokantaa
         String jdbcOsoite = "jdbc:sqlite:kanta.db";
         // jos heroku antaa käyttöömme tietokantaosoitteen, otetaan se käyttöön
-        if (System.getenv("DATABASE_URL") != null) {
+        if (System.getenv("JDBC_DATABASE_URL") != null) {
             jdbcOsoite = System.getenv("JDBC_DATABASE_URL");
         } 
 
