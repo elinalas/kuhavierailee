@@ -54,8 +54,8 @@ public class Database {
 
     private List<String> postgreLauseet() {
         ArrayList<String> lista = new ArrayList<>();
-        lista.add("DROP TABLE IF EXISTS Vieraskirja;");
-        lista.add("DROP TABLE IF EXISTS Kommentti;");
+//        lista.add("DROP TABLE IF EXISTS Vieraskirja;");
+//        lista.add("DROP TABLE IF EXISTS Kommentti;");
         lista.add("CREATE TABLE Vieraskirja (\n"
                 + "		id integer PRIMARY KEY,\n"
                 + "		nimi varchar(100),\n"
