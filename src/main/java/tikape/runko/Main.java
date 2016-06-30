@@ -57,7 +57,7 @@ public class Main {
 
         get("/vieraskirjat/:id", (req, res) -> {
             HashMap map = new HashMap(); 
-            map.put("kommentit", kommenttidao.findOne(Integer.parseInt(req.params("id")), Integer.parseInt(req.queryParams("sivu"))));
+            map.put("kommentit", kommenttidao.findOne(Integer.parseInt(req.params("id")), sivuNumero(req.queryParams("sivu"))));
             map.put("vieraskirja", vieraskirjaDao.findOne(Integer.parseInt(req.params("id"))));
 
             return new ModelAndView(map, "kommentti");
@@ -66,6 +66,13 @@ public class Main {
     
 
        
+    }
+    
+    public static int sivuNumero(String sivu) {
+        if(sivu == null) {
+            return 1;
+        } 
+        return Integer.parseInt(sivu);
     }
    
 }

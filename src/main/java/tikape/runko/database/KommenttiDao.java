@@ -49,10 +49,9 @@ public class KommenttiDao {
 //        return kommentit;
 //    }
 
-    public List<Kommentti> findOne(Integer key, int sivuu) throws SQLException {
+    public List<Kommentti> findOne(Integer key, int sivu) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM "
-                + "Kommentti WHERE vieraskirja = ? ORDER BY aika DESC LIMIT 10 OFFSET (" + sivuu + "*10) -1);");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Kommentti WHERE vieraskirja = ? ORDER BY aika DESC LIMIT 10 OFFSET " + ((sivu -1) * 10) + ";");
         stmt.setObject(1, key);
        
 
@@ -63,7 +62,6 @@ public class KommenttiDao {
             String lahettaja = rs.getString("lahettaja");
             String sisalto = rs.getString("sisalto");
             Integer vieraskirja = rs.getInt("vieraskirja");
-            Integer sivu = rs.getInt("sivu");
             Vieraskirja v = vieraskirjadao.findOne(vieraskirja);
             Kommentti k = new Kommentti(sisalto, lahettaja, aika, v);
 
