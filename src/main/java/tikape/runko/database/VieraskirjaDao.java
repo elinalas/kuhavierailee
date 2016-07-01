@@ -51,15 +51,15 @@ public class VieraskirjaDao implements Dao<Vieraskirja, Integer> {
 
         Connection connection = database.getConnection();
       
-        PreparedStatement stmt = connection.prepareStatement("SELECT vieraskirja.id, vieraskirja.nimi, vieraskirja.kotisivu, COUNT(Kommentti.id) AS 'Viestien määrä', MAX(Kommentti.aika) AS 'Viimeisin viesti'  FROM Vieraskirja LEFT  JOIN Kommentti ON Vieraskirja.id = Kommentti.vieraskirja GROUP BY vieraskirja.id, vieraskirja.nimi LIMIT 10;");
+        PreparedStatement stmt = connection.prepareStatement("SELECT vieraskirja.id, vieraskirja.nimi, vieraskirja.kotisivu, COUNT(Kommentti.id) AS maara, MAX(Kommentti.aika) AS viimeisin  FROM Vieraskirja LEFT  JOIN Kommentti ON Vieraskirja.id = Kommentti.vieraskirja GROUP BY vieraskirja.id, vieraskirja.nimi LIMIT 10;");
         ResultSet rs = stmt.executeQuery();
         List<Vieraskirja> vieraskirjat = new ArrayList();
         while (rs.next()) {
             Integer id = rs.getInt("id");
             String nimi = rs.getString("nimi");
             String kotisivu = rs.getString("kotisivu");
-            String viimeisin = rs.getString("Viimeisin viesti");
-            Integer montako = rs.getInt("Viestien määrä");
+            String viimeisin = rs.getString("viimeisin");
+            Integer montako = rs.getInt("maara");
          
 
             vieraskirjat.add(new Vieraskirja(id, nimi, kotisivu, viimeisin, montako));
