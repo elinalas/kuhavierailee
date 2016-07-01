@@ -16,21 +16,19 @@ public class Database {
     }
 
     public Connection getConnection() throws SQLException {
-        
+
         return DriverManager.getConnection(databaseAddress);
     }
-    
+
 //    public void setDebugMode(boolean d) {
 //        debug = d;
 //    }
 //    
-    
-
     public void init() {
 
         List<String> lauseet = null;
-        
-        if(this.databaseAddress.contains("postgres")) {
+
+        if (this.databaseAddress.contains("postgres")) {
             lauseet = postgreLauseet();
         } else {
             lauseet = sqliteLauseet();
@@ -54,14 +52,14 @@ public class Database {
 
     private List<String> postgreLauseet() {
         ArrayList<String> lista = new ArrayList<>();
-//        lista.add("DROP TABLE IF EXISTS Vieraskirja;");
-//        lista.add("DROP TABLE IF EXISTS Kommentti;");
+        lista.add("DROP TABLE Vieraskirja;");
+        lista.add("DROP TABLE Kommentti;");
         lista.add("CREATE TABLE Vieraskirja (\n"
-                + "		id integer PRIMARY KEY,\n"
+                + "		id serial PRIMARY KEY,\n"
                 + "		nimi varchar(100),\n"
                 + "		kotisivu varchar(400));");
         lista.add("CREATE TABLE Kommentti (\n"
-                + "		id integer PRIMARY KEY,\n"
+                + "		id serial PRIMARY KEY,\n"
                 + "		sisalto varchar(5000),\n"
                 + "		lahettaja varchar(50),\n"
                 + "		aika timestamp,\n"
