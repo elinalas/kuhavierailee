@@ -52,8 +52,9 @@ public class Database {
 
     private List<String> postgreLauseet() {
         ArrayList<String> lista = new ArrayList<>();
-        lista.add("DROP TABLE Vieraskirja;");
         lista.add("DROP TABLE Kommentti;");
+        lista.add("DROP TABLE Vieraskirja;");
+        
         lista.add("CREATE TABLE Vieraskirja (\n"
                 + "		id serial PRIMARY KEY,\n"
                 + "		nimi varchar(100),\n"
